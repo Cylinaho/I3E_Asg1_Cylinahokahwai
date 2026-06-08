@@ -10,6 +10,12 @@ public class Player : MonoBehaviour
 
     GameObject currentCollider; // Reference to the current collectible item
 
+    void OnCollisionEnter(Collision collision)
+    {
+        print($"💥 BUMPED INTO: {collision.gameObject.name} via Collision");
+        currentCollider = collision.gameObject;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         currentCollider = other.gameObject;
