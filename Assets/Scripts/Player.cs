@@ -47,28 +47,12 @@ public class Player : MonoBehaviour
                 // Check if the player won
                 if (score >= TotalItemsCollected)
                 {
-                    print("🏆 You collected all items! You win!");
+                    print(" You collected all items! You win!");
                 }
 
                 collectible.CollectCard();
                 currentCollider = null; // Clear this so we don't click it twice
                 return; // Exit here so we don't check for doors on a dead object
-            }
-
-            // 2. Check for beds
-            Bed bedObject = currentCollider.GetComponent<Bed>();
-            if (bedObject != null)
-            {
-                // Subtract HP based on how much damage the bed does
-                currentHP -= bedObject.hpDamage;
-                print($"🛌 Ouch! The bed is uncomfortable. Current HP: {currentHP}");
-
-                if (currentHP <= 0)
-                {
-                    print("💀 Game Over! You ran out of HP.");
-                }
-
-                return;
             }
         }
     }
