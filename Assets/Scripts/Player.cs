@@ -20,22 +20,6 @@ public class Player : MonoBehaviour
         startingPosition = transform.position;
     }
 
-    // NEW: Function to reset the player's position
-    public void Respawn()
-    {
-        transform.position = startingPosition;
-        
-        // If your player uses a Rigidbody, reset its speed so they don't keep falling/moving after teleporting
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector3.zero; 
-            rb.angularVelocity = Vector3.zero;
-        }
-
-        print("🔄 Player fell! Respawning back to start.");
-    }
-
     void OnCollisionEnter(Collision collision)
     {
         print($"BUMPED INTO: {collision.gameObject.name} via Collision");
@@ -79,5 +63,19 @@ public class Player : MonoBehaviour
                 return; // Exit here so we don't check for doors on a dead object
             }
         }
+    }
+
+    // Function to reset the player's position
+    public void Respawn()
+    {
+        CharacterController cc = GetComponent<CharacterController>();
+        if (cc != null) cc.enabled = false;
+
+        // Teleport back to your saved start position instead of hardcoded 0,0,0
+        transform.position = startingPosition;
+
+        if (cc != null) cc.enabled = true;
+
+        print("🔄 Fell into the floor! Respawned back to start.");
     }
 }

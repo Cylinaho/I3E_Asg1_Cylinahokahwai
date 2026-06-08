@@ -3,15 +3,13 @@ using UnityEngine;
 public class Floordmg : MonoBehaviour
 {
     // Automatically runs when the player physically hits the floor
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        // Check if the thing hitting the floor is the player
-        Player playerScript = collision.gameObject.GetComponent<Player>();
+        Player playerScript = other.gameObject.GetComponent<Player>();
 
         if (playerScript != null)
         {
-            // Tell the player script to teleport back to the start
+            // Now this function exists on the player again and will work!
             playerScript.Respawn();
         }
     }
-}
