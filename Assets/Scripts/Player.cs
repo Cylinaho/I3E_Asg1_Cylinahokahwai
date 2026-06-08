@@ -6,11 +6,35 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     int score = 0; // Player's score
 
+    Vector3 startingPosition; // To store the player's initial position for respawning
+
     public int currentHP = 100; // Player's current health points
 
     public int TotalItemsCollected = 0; // Total items collected by the player
 
     GameObject currentCollider; // Reference to the current collectible item
+
+    void Start()
+    {
+        // Remember exactly where the player started the game
+        startingPosition = transform.position;
+    }
+
+    // NEW: Function to reset the player's position
+    public void Respawn()
+    {
+        transform.position = startingPosition;
+        
+        // If your player uses a Rigidbody, reset its speed so they don't keep falling/moving after teleporting
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero; 
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        print("🔄 Player fell! Respawning back to start.");
+    }
 
     void OnCollisionEnter(Collision collision)
     {
