@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     int score = 0; // Player's score
 
+    public int currentHP = 100; // Player's current health points
+
     public int TotalItemsCollected = 0; // Total items collected by the player
 
     GameObject currentCollider; // Reference to the current collectible item
