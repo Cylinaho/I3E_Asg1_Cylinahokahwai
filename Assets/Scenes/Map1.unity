@@ -19715,6 +19715,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -3.0188856
       objectReference: {fileID: 0}
+    - target: {fileID: 3462354975430460514, guid: 83c6580376d8fd44986ce10603e60dd1, type: 3}
+      propertyPath: m_Name
+      value: cardID
+      objectReference: {fileID: 0}
     - target: {fileID: 5570107830596934670, guid: 83c6580376d8fd44986ce10603e60dd1, type: 3}
       propertyPath: m_Name
       value: RedCard
@@ -19738,6 +19742,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1435606780739417038, guid: 6beb19b49d7de3540919d4b0c91594fe, type: 3}
+      propertyPath: m_Name
+      value: cardID
+      objectReference: {fileID: 0}
     - target: {fileID: 1475756671413699670, guid: 6beb19b49d7de3540919d4b0c91594fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: -39.1
@@ -19822,6 +19830,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 641856173933759758, guid: 293f0009eaf5b4d4396e57045a99a1a0, type: 3}
+      propertyPath: m_Name
+      value: cardID
+      objectReference: {fileID: 0}
     - target: {fileID: 925317263958711936, guid: 293f0009eaf5b4d4396e57045a99a1a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -37.77

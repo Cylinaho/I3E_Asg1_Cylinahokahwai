@@ -8,22 +8,18 @@ public class CardCollectible : MonoBehaviour
     public void CollectCard()
     {
         var audioSource = GetComponent<AudioSource>();
-        if (audioSource != null && audioSource.clip != null)
-        {
-            audioSource.Play();
-        }
-        else
-        {
-            Debug.LogWarning("Missing AudioSource or Audio Clip on this card!");
-        }
-        // Logic to add the card to the player's collection
+        if (audioSource != null) audioSource.Play();
+
         Debug.Log("Collected card with ID: " + cardID);
-        // You can add code here to update the player's collection, UI, etc.
 
-        // Destory game object after the sound effect has finished playing
-        var renderer = GetComponent<Renderer>();
-        renderer.enabled = false;
+        // Disable the collider immediately so the player can't interact twice
+        if (GetComponent<Collider>() != null)
+            GetComponent<Collider>().enabled = false;
 
-        Destroy(gameObject, 1); // Remove the collectible from the scene
+        // Hide the game object's visuals safely
+        var renderer = GetComponentInChildren<Renderer>();
+        if (renderer != null) renderer.enabled = false;
+
+        Destroy(gameObject, 1);
     }
 }
