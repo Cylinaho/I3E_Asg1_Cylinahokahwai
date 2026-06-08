@@ -8,7 +8,14 @@ public class CardCollectible : MonoBehaviour
     public void CollectCard()
     {
         var audioSource = GetComponent<AudioSource>();
-        audioSource.Play(); // Play the card collection sound
+        if (audioSource != null && audioSource.clip != null)
+        {
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Missing AudioSource or Audio Clip on this card!");
+        }
         // Logic to add the card to the player's collection
         Debug.Log("Collected card with ID: " + cardID);
         // You can add code here to update the player's collection, UI, etc.
