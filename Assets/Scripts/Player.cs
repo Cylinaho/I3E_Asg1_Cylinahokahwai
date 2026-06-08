@@ -10,6 +10,18 @@ public class Player : MonoBehaviour
 
     GameObject currentCollider; // Reference to the current collectible item
 
+    void OnCollisionEnter(Collision collision)
+    {
+        currentCollider = collision.gameObject;
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        // Only clear if we are leaving the SPECIFIC object we are touching
+        if (currentCollider == collision.gameObject)
+            currentCollider = null;
+    }
+
     void OnInteract(InputValue value)
     {
         if (currentCollider != null)
