@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class Floordmg : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // Automatically runs when the player physically hits the floor
+    void OnCollisionEnter(Collision collision)
     {
-        
-    }
+        // Check if the thing hitting the floor is the player
+        Player playerScript = collision.gameObject.GetComponent<Player>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (playerScript != null)
+        {
+            // Tell the player script to teleport back to the start
+            playerScript.Respawn();
+        }
     }
 }
