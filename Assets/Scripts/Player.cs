@@ -12,17 +12,19 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        print($"💥 BUMPED INTO: {collision.gameObject.name} via Collision");
+        print($"BUMPED INTO: {collision.gameObject.name} via Collision");
         currentCollider = collision.gameObject;
     }
 
     void OnTriggerEnter(Collider other)
     {
+        print($"ENTERED: {other.gameObject.name} via Trigger");
         currentCollider = other.gameObject;
     }
 
     void OnTriggerExit(Collider other)
     {
+        print($"EXITED: {other.gameObject.name} via Trigger");
         if (currentCollider == other.gameObject)
             currentCollider = null;
     }
