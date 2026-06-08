@@ -13,3 +13,4 @@ public class Floordmg : MonoBehaviour
             playerScript.Respawn();
         }
     }
+}
