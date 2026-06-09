@@ -80,6 +80,20 @@ public class Player : MonoBehaviour
         }
     }
 
+// Add this to your Player.cs script
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        // Check if the surface our feet/body just hit has the Clearbed script
+        Clearbed clearBedScript = hit.gameObject.GetComponent<Clearbed>();
+
+        if (clearBedScript != null)
+        {
+            Debug.Log($"🎯 Landed on top of Clearbed: {hit.gameObject.name}");
+
+            // Call the play sound function inside the clearbed script
+            clearBedScript.PlayLandingSound();
+        }
+    }
     public void Respawn()
     {
         CharacterController cc = GetComponent<CharacterController>();
