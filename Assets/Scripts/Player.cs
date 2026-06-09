@@ -3,15 +3,11 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     int score = 0; // Player's score
-
     Vector3 startingPosition; // To store the player's initial position for respawning
 
     public int currentHP = 100; // Player's current health points
-
     public int TotalItemsCollected = 0; // Total items collected by the player
-
     GameObject currentCollider; // Reference to the current collectible item
 
     void Start()
@@ -44,6 +40,7 @@ public class Player : MonoBehaviour
         if (currentCollider != null)
         {
             print($"Interacting with {currentCollider.name}");
+            
             // 1. Check for Collectibles
             var collectible = currentCollider.GetComponent<CardCollectible>();
             if (collectible != null)
@@ -61,6 +58,13 @@ public class Player : MonoBehaviour
                 collectible.CollectCard();
                 currentCollider = null; // Clear this so we don't click it twice
                 return; // Exit here so we don't check for doors on a dead object
+            } // <-- FIXED: Added this missing closing bracket!
+
+            // 2. Check for Doors
+            var door = currentCollider.GetComponent<Door>();
+            if (door != null)
+            {
+                door.Interact();
             }
         }
     }
