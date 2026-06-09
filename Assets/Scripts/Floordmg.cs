@@ -7,6 +7,12 @@ public class Floordmg : MonoBehaviour
     {
         Player playerScript = other.gameObject.GetComponent<Player>();
 
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+
         if (playerScript != null)
         {
             // Now this function exists on the player again and will work!
