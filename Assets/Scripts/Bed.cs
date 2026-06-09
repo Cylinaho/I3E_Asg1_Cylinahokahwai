@@ -4,11 +4,11 @@ public class Bed : MonoBehaviour
 {
     public int hpDamage = 10;
 
-    // CHANGED: Changed from OnCollisionEnter to OnTriggerEnter
-    void OnTriggerEnter(Collider other)
+    // FIX: Changed from OnTriggerEnter to OnCollisionEnter
+    void OnCollisionEnter(Collision collision)
     {
-        // Check if the object entering the trigger has the Player script
-        Player playerScript = other.gameObject.GetComponent<Player>();
+        // Check if the object we collided with has the Player script
+        Player playerScript = collision.gameObject.GetComponent<Player>();
 
         AudioSource audioSource = GetComponent<AudioSource>();
         if (audioSource != null)
@@ -24,7 +24,7 @@ public class Bed : MonoBehaviour
             if (playerScript.currentHP <= 0)
             {
                 Debug.Log("💀 Game Over! You ran out of HP.");
-                // Optional: You could call playerScript.Respawn(); here too!
+                playerScript.Respawn(); // Triggers your respawn logic
             }
         }
     }
