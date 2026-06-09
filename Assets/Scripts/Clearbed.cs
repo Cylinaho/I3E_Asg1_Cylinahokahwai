@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class Clearbed : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    // CHANGED: Changed from OnCollisionEnter to OnTriggerEnter
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Something physically hit the bed: " + collision.gameObject.name);
-
-        AudioSource audioSource = GetComponent<AudioSource>();
-        
-        // FIXED: Changed '== null' to '!= null' so it actually plays when found!
-        if (audioSource != null) 
+        // Make sure it's the player touching it
+        if (other.GetComponent<Player>() != null)
         {
-            audioSource.Play();
+            Debug.Log("Player touched the clear bed!");
+
+            AudioSource audioSource = GetComponent<AudioSource>();
+            if (audioSource != null) 
+            {
+                audioSource.Play();
+            }
         }
     }
 }
