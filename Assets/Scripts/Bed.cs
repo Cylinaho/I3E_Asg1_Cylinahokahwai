@@ -23,7 +23,7 @@ public class Bed : MonoBehaviour
 
             if (playerScript.currentHP <= 0)
             {
-                Debug.Log("💀 Game Over! You ran out of HP.");
+                Debug.Log("Game Over! You ran out of HP.");
                 playerScript.Respawn(); // Triggers your respawn logic
             }
         }

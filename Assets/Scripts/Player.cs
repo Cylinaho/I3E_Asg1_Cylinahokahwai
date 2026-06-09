@@ -100,6 +100,6 @@ public class Player : MonoBehaviour
 
         if (cc != null) cc.enabled = true;
 
-        print("🔄 Fell into the floor! Respawned back to start.");
+        print('Fell into the floor! Respawned back to start.");
     }
 }

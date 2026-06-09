@@ -23,7 +23,7 @@ public class Clearbed : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("⚠️ No AudioClip assigned to Clearbed!");
+                Debug.LogWarning("No AudioClip assigned to Clearbed!");
             }
         }
     }
