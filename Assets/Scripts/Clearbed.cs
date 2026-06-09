@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Clearbed : MonoBehaviour
 {
-    // CHANGED: Changed from OnCollisionEnter to OnTriggerEnter
-    private void OnTriggerEnter(Collider other)
+    // FIX: Changed Collider to Collision for physical collisions
+    private void OnCollisionEnter(Collision collision)
     {
         // Make sure it's the player touching it
-        if (other.GetComponent<Player>() != null)
+        if (collision.gameObject.GetComponent<Player>() != null)
         {
             Debug.Log("Player touched the clear bed!");
 

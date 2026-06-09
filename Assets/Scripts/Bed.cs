@@ -4,7 +4,7 @@ public class Bed : MonoBehaviour
 {
     public int hpDamage = 10;
 
-    // FIX: Changed from OnTriggerEnter to OnCollisionEnter
+    // Changed from OnTriggerEnter to OnCollisionEnter
     void OnCollisionEnter(Collision collision)
     {
         // Check if the object we collided with has the Player script
