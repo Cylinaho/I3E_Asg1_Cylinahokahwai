@@ -3,12 +3,12 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    int score = 0; 
-    Vector3 startingPosition; 
+    int score = 0;
+    Vector3 startingPosition;
 
-    public int currentHP = 100; 
-    public int TotalItemsCollected = 0; 
-    GameObject currentCollider; 
+    public int currentHP = 100;
+    public int TotalItemsCollected = 0;
+    GameObject currentCollider;
 
     void Start()
     {
@@ -45,12 +45,12 @@ public class Player : MonoBehaviour
         if (currentCollider != null)
         {
             print($"Interacting with {currentCollider.name}");
-            
+
             // 1. Check for Collectibles
             var collectible = currentCollider.GetComponent<CardCollectible>();
             if (collectible != null)
             {
-                score += collectible.cardID; 
+                score += collectible.cardID;
                 print($"★ Item Collected! Current Score: {score} / {TotalItemsCollected}");
 
                 if (score >= TotalItemsCollected)
@@ -59,15 +59,15 @@ public class Player : MonoBehaviour
                 }
 
                 collectible.CollectCard();
-                currentCollider = null; 
-                return; 
-            } 
+                currentCollider = null;
+                return;
+            }
 
             // 2. Check for Security Doors
             var securityDoor = currentCollider.GetComponent<SecurityDoor>();
             if (securityDoor != null)
             {
-                securityDoor.Interact(this); 
+                securityDoor.Interact(this);
                 return;
             }
 
@@ -80,17 +80,14 @@ public class Player : MonoBehaviour
         }
     }
 
-// Add this to your Player.cs script
+    // Add this to your Player.cs script
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        // Check if the surface our feet/body just hit has the Clearbed script
         Clearbed clearBedScript = hit.gameObject.GetComponent<Clearbed>();
 
         if (clearBedScript != null)
         {
-            Debug.Log($"🎯 Landed on top of Clearbed: {hit.gameObject.name}");
-
-            // Call the play sound function inside the clearbed script
+            // The bed script will now handle filtering out the multiple rapid sounds
             clearBedScript.PlayLandingSound();
         }
     }

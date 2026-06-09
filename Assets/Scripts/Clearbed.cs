@@ -2,20 +2,34 @@ using UnityEngine;
 
 public class Clearbed : MonoBehaviour
 {
-    public AudioClip bedSound; 
+    public AudioClip bedSound;
 
-    // This gets called directly by the Player script when they jump on it
+    private bool canPlaySound = true;
+    public float soundCooldown = 1.0f; // Time in seconds before the sound can play again
+
     public void PlayLandingSound()
     {
-        if (bedSound != null)
+        // Only play if the cooldown is over
+        if (canPlaySound)
         {
-            // PlayClipAtPoint creates a temporary audio player so the sound works cleanly
-            AudioSource.PlayClipAtPoint(bedSound, transform.position);
-            Debug.Log("🔊 Clearbed sound played successfully!");
+            if (bedSound != null)
+            {
+                AudioSource.PlayClipAtPoint(bedSound, transform.position);
+                Debug.Log("🔊 Clearbed sound played once!");
+
+                // Start the cooldown process
+                canPlaySound = false;
+                Invoke(nameof(ResetSoundCooldown), soundCooldown);
+            }
+            else
+            {
+                Debug.LogWarning("⚠️ No AudioClip assigned to Clearbed!");
+            }
         }
-        else
-        {
-            Debug.LogWarning("⚠️ You jumped on the bed, but no AudioClip is assigned in the Inspector!");
-        }
+    }
+
+    private void ResetSoundCooldown()
+    {
+        canPlaySound = true;
     }
 }
