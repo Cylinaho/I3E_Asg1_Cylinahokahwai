@@ -2,18 +2,23 @@ using UnityEngine;
 
 public class Clearbed : MonoBehaviour
 {
-    // FIX: Changed Collider to Collision for physical collisions
+    // Drag your audio clip into this slot in the Unity Inspector
+    public AudioClip bedSound; 
+
     private void OnCollisionEnter(Collision collision)
     {
         // Make sure it's the player touching it
-        if (collision.gameObject.GetComponent<Player>() != null)
+        Player player = collision.gameObject.GetComponent<Player>();
+        
+        if (player != null)
         {
             Debug.Log("Player touched the clear bed!");
 
-            AudioSource audioSource = GetComponent<AudioSource>();
-            if (audioSource != null) 
+            // Play the sound at the bed's position. 
+            // This creates an independent sound that won't cut out or glitch when you teleport!
+            if (bedSound != null)
             {
-                audioSource.Play();
+                AudioSource.PlayClipAtPoint(bedSound, transform.position);
             }
         }
     }
