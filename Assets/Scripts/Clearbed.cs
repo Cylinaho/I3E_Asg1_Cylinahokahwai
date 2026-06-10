@@ -1,9 +1,10 @@
 using UnityEngine;
 
+// This forces Unity to automatically add an AudioSource component to this object
+[RequireComponent(typeof(AudioSource))]
 public class Clearbed : MonoBehaviour
 {
-    public AudioClip bedSound;
-
+    private AudioSource audioSource;
     private bool canPlaySound = true;
     public float soundCooldown = 1.0f; // Time in seconds before the sound can play again
 
@@ -12,9 +13,16 @@ public class Clearbed : MonoBehaviour
         // Only play if the cooldown is over
         if (canPlaySound)
         {
-            if (bedSound != null)
+            // Fetch the AudioSource component if we haven't already
+            if (audioSource == null)
             {
-                AudioSource.PlayClipAtPoint(bedSound, transform.position);
+                audioSource = GetComponent<AudioSource>();
+            }
+
+            // Check if there is an audio clip assigned inside the AudioSource
+            if (audioSource != null && audioSource.clip != null)
+            {
+                audioSource.Play();
                 Debug.Log("🔊 Clearbed sound played once!");
 
                 // Start the cooldown process
@@ -23,7 +31,7 @@ public class Clearbed : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("No AudioClip assigned to Clearbed!");
+                Debug.LogWarning("No Audio Clip assigned directly inside the AudioSource component on Clearbed!");
             }
         }
     }
