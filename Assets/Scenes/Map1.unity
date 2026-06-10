@@ -9354,6 +9354,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 453084650579209855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 596388348}
+    - targetCorrespondingSourceObject: {fileID: 453084650579209855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 596388355}
   m_SourcePrefab: {fileID: 100100000, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
 --- !u!1 &596388346 stripped
 GameObject:
@@ -9375,6 +9378,7 @@ MonoBehaviour:
   ScoreText: {fileID: 1110160982}
   HPText: {fileID: 2038585086}
   NoteText: {fileID: 512311037}
+  maxHP: 100
   currentHP: 100
   TotalItemsCollected: 10
 --- !u!54 &596388348
@@ -9404,6 +9408,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &596388355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596388346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792493e5fe629cd4881845adb5a71149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &606578289
 GameObject:
   m_ObjectHideFlags: 0
