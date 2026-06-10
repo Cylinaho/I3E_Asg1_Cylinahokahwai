@@ -1,10 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
     int score = 0;
     Vector3 startingPosition;
+
+    public TMP_Text ScoreText;
+
+    public TMP_Text HPText;
+
+    public TMP_Text NoteText;
 
     public int currentHP = 100;
     public int TotalItemsCollected = 0;
