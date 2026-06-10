@@ -20,6 +20,12 @@ public class Player : MonoBehaviour
     void Start()
     {
         startingPosition = transform.position;
+        UPdateHP();
+    }
+
+    public void UPdateHP()
+    {
+        HPText.text = $"HP: {currentHP}";
     }
 
     // Helper function so the Security Door can check your score
@@ -59,6 +65,7 @@ public class Player : MonoBehaviour
             {
                 score += collectible.cardID;
                 print($"★ Item Collected! Current Score: {score} / {TotalItemsCollected}");
+                ScoreText.text = $"Keycards collected: {score} / {TotalItemsCollected}";
 
                 if (score >= TotalItemsCollected)
                 {
@@ -87,7 +94,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Add this to your Player.cs script
+    // This is where we check for landing on the Clearbed, which will play a sound effect.
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Clearbed clearBedScript = hit.gameObject.GetComponent<Clearbed>();

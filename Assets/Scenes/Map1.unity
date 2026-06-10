@@ -9374,6 +9374,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a8c4124ac46a48a14ef60a72dab9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  ScoreText: {fileID: 1110160982}
+  HPText: {fileID: 2038585086}
+  NoteText: {fileID: 512311037}
   currentHP: 100
   TotalItemsCollected: 10
 --- !u!54 &596388348
@@ -14442,7 +14445,7 @@ GameObject:
   - component: {fileID: 1033277534}
   - component: {fileID: 1033277533}
   m_Layer: 0
-  m_Name: MainMenu
+  m_Name: LobbyNotes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15441,7 +15444,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Security Card Collected: '
+  m_text: 'Keycard Collected:  0 / 10'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -28213,7 +28216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'HP Left:'
+  m_text: 'HP Left: 100'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

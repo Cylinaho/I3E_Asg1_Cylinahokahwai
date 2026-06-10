@@ -19,12 +19,14 @@ public class Bed : MonoBehaviour
         if (playerScript != null)
         {
             playerScript.currentHP -= hpDamage;
+            playerScript.UpdateHP();
+
             Debug.Log("Ouch! You touched the uncomfortable bed. Current HP: " + playerScript.currentHP);
 
             if (playerScript.currentHP <= 0)
             {
                 Debug.Log("Game Over! You ran out of HP.");
-                playerScript.Respawn(); // Triggers your respawn logic
+                playerScript.Respawn();
             }
         }
     }
