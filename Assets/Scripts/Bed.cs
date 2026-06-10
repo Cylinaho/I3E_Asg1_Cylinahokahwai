@@ -4,10 +4,8 @@ public class Bed : MonoBehaviour
 {
     public int hpDamage = 10;
 
-    // Changed from OnTriggerEnter to OnCollisionEnter
     void OnCollisionEnter(Collision collision)
     {
-        // Check if the object we collided with has the Player script
         Player playerScript = collision.gameObject.GetComponent<Player>();
 
         AudioSource audioSource = GetComponent<AudioSource>();
@@ -18,7 +16,10 @@ public class Bed : MonoBehaviour
 
         if (playerScript != null)
         {
+            // Just apply the damage directly...
             playerScript.currentHP -= hpDamage;
+            
+            // ...because UPdateHP() will automatically clamp it to 0 and fix the UI text!
             playerScript.UPdateHP();
 
             Debug.Log("Ouch! You touched the uncomfortable bed. Current HP: " + playerScript.currentHP);

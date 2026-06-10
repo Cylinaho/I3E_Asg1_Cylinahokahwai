@@ -8,11 +8,10 @@ public class Player : MonoBehaviour
     Vector3 startingPosition;
 
     public TMP_Text ScoreText;
-
     public TMP_Text HPText;
-
     public TMP_Text NoteText;
 
+    public int maxHP = 100; // <-- ADDED THIS: Unity needs to know what maxHP is!
     public int currentHP = 100;
     public int TotalItemsCollected = 0;
     GameObject currentCollider;
@@ -25,10 +24,16 @@ public class Player : MonoBehaviour
 
     public void UPdateHP()
     {
-        HPText.text = $"HP: {currentHP}";
+        // 1. Clamp the math safely
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        
+        // 2. FIXED: You must actually tell the UI text component to display the new number!
+        if (HPText != null)
+        {
+            HPText.text = "HP: " + currentHP;
+        }
     }
 
-    // Helper function so the Security Door can check your score
     public int GetScore()
     {
         return score;
@@ -59,7 +64,6 @@ public class Player : MonoBehaviour
         {
             print($"Interacting with {currentCollider.name}");
 
-            // 1. Check for Collectibles
             var collectible = currentCollider.GetComponent<CardCollectible>();
             if (collectible != null)
             {
@@ -77,7 +81,6 @@ public class Player : MonoBehaviour
                 return;
             }
 
-            // 2. Check for Security Doors
             var securityDoor = currentCollider.GetComponent<SecurityDoor>();
             if (securityDoor != null)
             {
@@ -85,7 +88,6 @@ public class Player : MonoBehaviour
                 return;
             }
 
-            // 3. Check for Normal Doors
             var door = currentCollider.GetComponent<Door>();
             if (door != null)
             {
@@ -94,17 +96,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    // This is where we check for landing on the Clearbed, which will play a sound effect.
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Clearbed clearBedScript = hit.gameObject.GetComponent<Clearbed>();
-
         if (clearBedScript != null)
         {
-            // The bed script will now handle filtering out the multiple rapid sounds
             clearBedScript.PlayLandingSound();
         }
     }
+
     public void Respawn()
     {
         CharacterController cc = GetComponent<CharacterController>();
@@ -113,6 +113,10 @@ public class Player : MonoBehaviour
         transform.position = startingPosition;
 
         if (cc != null) cc.enabled = true;
+
+        // FIXED: Reset HP back to full when respawning, and update the text!
+        currentHP = maxHP;
+        UPdateHP();
 
         print("Fell into the floor! Respawned back to start.");
     }
