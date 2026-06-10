@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class Floordmg : MonoBehaviour
 {
-    // Drag your death sound clip here in the Unity Inspector
+    // Drag my death sound clip here in the Unity Inspector
     public AudioClip deathSound; 
+
+    // Adjust this number in the Inspector (0.0 is silent, 1.0 is full volume)
+    public float volume = 1.0f; 
 
     // Automatically runs when the player enters the floor trigger zone
     void OnTriggerEnter(Collider other)
@@ -12,11 +15,11 @@ public class Floordmg : MonoBehaviour
 
         if (playerScript != null)
         {
-            // FIX: Play the audio at the position where the player fell.
             // This ensures it doesn't cut out when the player teleports away!
             if (deathSound != null)
             {
-                AudioSource.PlayClipAtPoint(deathSound, other.transform.position);
+                // The volume variable is passed in as the third argument here
+                AudioSource.PlayClipAtPoint(deathSound, other.transform.position, volume);
             }
             else
             {
