@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class EndGameDoor : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public string sceneToLoad = "MainMenu"; // Name of the scene to load when the player enters the door
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
+        Player playerScript = other.gameObject.GetComponent<Player>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (playerScript != null)
+        {
+            // Load the specified scene when the player enters the door
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
+        }
     }
 }
+
