@@ -1117,7 +1117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce8bc843eb060249b3333a66455c1ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  moveDistance: 29
+  moveDistance: 31
   moveSpeed: 0.2
 --- !u!1001 &118626563
 PrefabInstance:
@@ -8803,7 +8803,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -8878,7 +8878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916610707ce284c438b5e76e5420b506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  sceneToLoad: MainMenu
+  sceneToLoad: RESTART
 --- !u!1 &587065670
 GameObject:
   m_ObjectHideFlags: 0
@@ -19291,7 +19291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916610707ce284c438b5e76e5420b506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  sceneToLoad: MainMenu
+  sceneToLoad: RESTART
 --- !u!1001 &1612095358
 PrefabInstance:
   m_ObjectHideFlags: 0
