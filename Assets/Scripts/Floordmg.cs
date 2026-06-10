@@ -19,7 +19,7 @@ public class Floordmg : MonoBehaviour
             if (deathSound != null)
             {
                 // The volume variable is passed in as the third argument here
-                AudioSource.PlayClipAtPoint(deathSound, other.transform.position, volume);
+                AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, volume);
             }
             else
             {

@@ -17190,7 +17190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   deathSound: {fileID: 8300000, guid: c857faa97b896c5478e51b96977a86f3, type: 3}
-  volume: 2
+  volume: 4
 --- !u!65 &1437717246
 BoxCollider:
   m_ObjectHideFlags: 0
