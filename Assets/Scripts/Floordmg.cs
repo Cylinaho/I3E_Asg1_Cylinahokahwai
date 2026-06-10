@@ -5,8 +5,8 @@ public class Floordmg : MonoBehaviour
     // Drag my death sound clip here in the Unity Inspector
     public AudioClip deathSound; 
 
-    // Adjust this number in the Inspector (0.0 is silent, 1.0 is full volume)
-    public float volume = 1.0f; 
+    // Adjust this number in the Inspector (0.0 is silent, 5.0 is full volume)
+    public float volume = 5.0f; 
 
     // Automatically runs when the player enters the floor trigger zone
     void OnTriggerEnter(Collider other)
