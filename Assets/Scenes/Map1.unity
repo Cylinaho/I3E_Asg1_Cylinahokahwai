@@ -1026,7 +1026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 432af45efeb53ff40bd7caa6553a9d20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.45
+      value: -0.65
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 432af45efeb53ff40bd7caa6553a9d20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1118,7 +1118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   moveDistance: 29
-  moveSpeed: 0.5
+  moveSpeed: 0.2
 --- !u!1001 &118626563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6216,7 +6216,7 @@ Transform:
   m_GameObject: {fileID: 512167514}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 8.76, y: -0.86, z: 47.350002}
+  m_LocalPosition: {x: 8.76, y: -1.41, z: 47.350002}
   m_LocalScale: {x: 3.5047622, y: 3.43564, z: 0.6134738}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6409,10 +6409,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Note: Collect all 10 keycards to escape. You will also face obstacles
-    along the way. Good luck! :)
-
-'
+  m_text: 'Note: Collect all 10 keycards to unlock the exit door. Watch out for obstacles
+    along the way! If you die, you''ll automatically respawn. Good luck! :)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
