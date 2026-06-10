@@ -19,7 +19,7 @@ public class Bed : MonoBehaviour
         if (playerScript != null)
         {
             playerScript.currentHP -= hpDamage;
-            playerScript.UpdateHP();
+            playerScript.UPdateHP();
 
             Debug.Log("Ouch! You touched the uncomfortable bed. Current HP: " + playerScript.currentHP);
 
