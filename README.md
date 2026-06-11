@@ -104,7 +104,7 @@ Collect all **10 Staff Keycards** scattered throughout the hospital, survive the
 
 ## GenAI Usage Disclosure
 
-ChatGPT was used to:
+Gemini was used to:
 
 * Assist with implementation planning
 * Generate development checklists
