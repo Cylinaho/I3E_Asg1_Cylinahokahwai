@@ -4,121 +4,107 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
+    // Player Stats
     int score = 0;
-    Vector3 startingPosition;
-
-    public TMP_Text ScoreText;
-    public TMP_Text HPText;
-    public TMP_Text NoteText;
-
-    public int maxHP = 100; // <-- ADDED THIS: Unity needs to know what maxHP is!
+    public int maxHP = 100;
     public int currentHP = 100;
     public int TotalItemsCollected = 0;
 
-    public SecurityDoor exitDoor; // Drag your door into this slot in the Unity Inspector!
+    // Movement & Spawn
+    Vector3 startingPosition;
+    CharacterController characterController;
 
+    // UI Elements
+    public TMP_Text ScoreText;
+    public TMP_Text HPText;
+
+    // World Objects
+    public SecurityDoor exitDoor;
     GameObject currentCollider;
 
     void Start()
     {
         startingPosition = transform.position;
-        UPdateHP();
+        characterController = GetComponent<CharacterController>();
+        UpdateHP();
     }
 
-    public void UPdateHP()
+    public void UpdateHP()
     {
-        // 1. Clamp the math safely
+        // Keep HP between 0 and maxHP
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
         
-        // 2. Update the UI text
         if (HPText != null)
         {
             HPText.text = "HP: " + currentHP;
         }
     }
 
-    public int GetScore()
-    {
-        return score;
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        print($"BUMPED INTO: {collision.gameObject.name} via Collision");
-        currentCollider = collision.gameObject;
-    }
-
+    // Detect when standing near an item or door
     void OnTriggerEnter(Collider other)
     {
-        print($"ENTERED: {other.gameObject.name} via Trigger");
         currentCollider = other.gameObject;
-    }
 
-    void OnTriggerExit(Collider other)
-    {
-        print($"EXITED: {other.gameObject.name} via Trigger");
-        if (currentCollider == other.gameObject)
-            currentCollider = null;
-    }
-
-    void OnInteract(InputValue value)
-    {
-        if (currentCollider != null)
-        {
-            var collectible = currentCollider.GetComponent<CardCollectible>();
-            if (collectible != null)
-            {
-                // Assuming cardID is 1 per card collected
-                score += collectible.cardID; 
-                print($"★ Item Collected! Current Score: {score} / {TotalItemsCollected}");
-                ScoreText.text = $"Keycards collected: {score} / {TotalItemsCollected}";
-
-                // CHECK FOR WIN CONDITION IMMEDIATELY UPON COLLECTION
-                if (score >= TotalItemsCollected)
-                {
-                    print("You collected all items! Opening the exit door automatically!");
-                    if (exitDoor != null)
-                    {
-                        exitDoor.ForceOpenDoor(); // Call the door's automatic unlock function
-                    }
-                }
-
-                collectible.CollectCard();
-                currentCollider = null;
-                return;
-            }
-
-            // Normal manual doors can still use manual interaction if needed
-            var door = currentCollider.GetComponent<Door>();
-            if (door != null)
-            {
-                door.Interact();
-            }
-        }
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        Clearbed clearBedScript = hit.gameObject.GetComponent<Clearbed>();
+        // If the player lands on a "Clearbed", play the sound immediately
+        Clearbed clearBedScript = other.GetComponent<Clearbed>();
         if (clearBedScript != null)
         {
             clearBedScript.PlayLandingSound();
         }
     }
 
+    // Detect when walking away from an item or door
+    void OnTriggerExit(Collider other)
+    {
+        if (currentCollider == other.gameObject)
+        {
+            currentCollider = null;
+        }
+    }
+
+    // Called when the player presses the Interact button
+    void OnInteract(InputValue value)
+    {
+        // Do nothing if we aren't standing near anything
+        if (currentCollider == null) return;
+
+        // 1. Check if it's a Card Collectible
+        CardCollectible collectible = currentCollider.GetComponent<CardCollectible>();
+        if (collectible != null)
+        {
+            score = score + 1; 
+            ScoreText.text = "Keycards collected: " + score + " / " + TotalItemsCollected;
+
+            // Check if win condition is met
+            if (score >= TotalItemsCollected && exitDoor != null)
+            {
+                exitDoor.ForceOpenDoor();
+            }
+
+            collectible.CollectCard();
+            currentCollider = null;
+            return;
+        }
+
+        // 2. Check if it's a normal Door
+        Door door = currentCollider.GetComponent<Door>();
+        if (door != null)
+        {
+            door.Interact();
+        }
+    }
+
     public void Respawn()
     {
-        CharacterController cc = GetComponent<CharacterController>();
-        if (cc != null) cc.enabled = false;
+        // Temporarily turn off controller to move the player safely
+        if (characterController != null) characterController.enabled = false;
 
         transform.position = startingPosition;
 
-        if (cc != null) cc.enabled = true;
+        if (characterController != null) characterController.enabled = true;
 
-        // FIXED: Reset HP back to full when respawning, and update the text!
+        // Reset HP
         currentHP = maxHP;
-        UPdateHP();
-
-        print("Fell into the floor! Respawned back to start.");
+        UpdateHP();
     }
 }
