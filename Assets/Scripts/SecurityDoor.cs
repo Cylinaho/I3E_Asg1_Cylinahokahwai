@@ -3,32 +3,60 @@ using UnityEngine;
 public class SecurityDoor : MonoBehaviour
 {
     [Header("Door Settings")]
-    public Vector3 rotateAmount = new Vector3(0, 90, 0); 
     public int requiredCards = 10; 
 
     private bool isOpen = false;
+    private Animator animatorComponent;
 
+    void Start()
+    {
+        // Automatically look for the animator on this object or its children
+        animatorComponent = GetComponent<Animator>();
+        if (animatorComponent == null)
+        {
+            animatorComponent = GetComponentInChildren<Animator>();
+        }
+    }
+
+    // This gets called directly by the Player script when pressing the interact button
     public void Interact(Player player)
     {
+        if (player == null) return;
+
         if (isOpen)
         {
-            transform.Rotate(-rotateAmount);
             isOpen = false;
-            print("🚪 Closing security door.");
+            PlayAnimation();
+            print(" Doors closing security door.");
             return;
         }
 
-        // FIXED: Changed player.CardID() to player.GetScore() to match your Player script
-        if (player.GetScore() >= requiredCards)
+        // Checks the player's public score against requirements
+        if (player. >= requiredCards)
         {
-            transform.Rotate(rotateAmount);
             isOpen = true;
-            print("🔓 Access Granted! The final door opens.");
+            PlayAnimation();
+            print(" Access Granted! The final door opens.");
         }
         else
         {
-            int missingCards = requiredCards - player.GetScore();
-            print($"🔒 Access Denied! You need {missingCards} more security cards.");
+            int missingCards = requiredCards - player.score;
+            print($" Access Denied! You need {missingCards} more security cards.");
+        }
+    }
+
+    private void PlayAnimation()
+    {
+        if (animatorComponent != null)
+        {
+            animatorComponent.SetBool("isOpen", isOpen);
+        }
+        else
+        {
+            if (isOpen) transform.Rotate(new Vector3(0, 90, 0));
+            else transform.Rotate(new Vector3(0, -90, 0));
+            
+            Debug.LogWarning($"No Animator found on {gameObject.name}! Snapping instantly instead.", this);
         }
     }
 }

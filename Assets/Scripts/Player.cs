@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     public int maxHP = 100; // <-- ADDED THIS: Unity needs to know what maxHP is!
     public int currentHP = 100;
     public int TotalItemsCollected = 0;
+
+    public SecurityDoor exitDoor; // Drag your door into this slot in the Unity Inspector!
+
     GameObject currentCollider;
 
     void Start()
@@ -27,7 +30,7 @@ public class Player : MonoBehaviour
         // 1. Clamp the math safely
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
         
-        // 2. FIXED: You must actually tell the UI text component to display the new number!
+        // 2. Update the UI text
         if (HPText != null)
         {
             HPText.text = "HP: " + currentHP;
