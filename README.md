@@ -106,8 +106,6 @@ Collect all **10 Staff Keycards** scattered throughout the hospital, survive the
 
 ChatGPT was used to:
 
-* Review and debug scripts
-* Improve code organization and comments
 * Assist with implementation planning
 * Generate development checklists
 * Help troubleshoot gameplay systems
