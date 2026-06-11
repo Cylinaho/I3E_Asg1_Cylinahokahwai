@@ -6,28 +6,29 @@ public class Bed : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // 1. Check if the thing that touched the bed is actually the Player
         Player playerScript = collision.gameObject.GetComponent<Player>();
-        if (playerScript == null) return; // If it's not the player, stop here!
 
-        // 2. Play the damage sound effect
         AudioSource audioSource = GetComponent<AudioSource>();
         if (audioSource != null)
         {
             audioSource.Play();
         }
 
-        // 3. Deal damage and update the player's health UI
-        playerScript.currentHP -= hpDamage;
-        playerScript.UpdateHP(); 
-
-        Debug.Log("Ouch! Touched the bed. Current HP: " + playerScript.currentHP);
-
-        // 4. Handle player death if health drops to 0
-        if (playerScript.currentHP <= 0)
+        if (playerScript != null)
         {
-            Debug.Log("Game Over! Respawning...");
-            playerScript.Respawn();
+            // Just apply the damage directly...
+            playerScript.currentHP -= hpDamage;
+            
+            // ...because UPdateHP() will automatically clamp it to 0 and fix the UI text!
+            playerScript.UPdateHP();
+
+            Debug.Log("Ouch! You touched the uncomfortable bed. Current HP: " + playerScript.currentHP);
+
+            if (playerScript.currentHP <= 0)
+            {
+                Debug.Log("Game Over! You ran out of HP.");
+                playerScript.Respawn();
+            }
         }
     }
 }
