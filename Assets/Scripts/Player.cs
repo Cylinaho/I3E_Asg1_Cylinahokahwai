@@ -65,18 +65,22 @@ public class Player : MonoBehaviour
     {
         if (currentCollider != null)
         {
-            print($"Interacting with {currentCollider.name}");
-
             var collectible = currentCollider.GetComponent<CardCollectible>();
             if (collectible != null)
             {
-                score += collectible.cardID;
+                // Assuming cardID is 1 per card collected
+                score += collectible.cardID; 
                 print($"★ Item Collected! Current Score: {score} / {TotalItemsCollected}");
                 ScoreText.text = $"Keycards collected: {score} / {TotalItemsCollected}";
 
+                // CHECK FOR WIN CONDITION IMMEDIATELY UPON COLLECTION
                 if (score >= TotalItemsCollected)
                 {
-                    print(" You collected all items! You win!");
+                    print("You collected all items! Opening the exit door automatically!");
+                    if (exitDoor != null)
+                    {
+                        exitDoor.ForceOpenDoor(); // Call the door's automatic unlock function
+                    }
                 }
 
                 collectible.CollectCard();
@@ -84,13 +88,7 @@ public class Player : MonoBehaviour
                 return;
             }
 
-            var securityDoor = currentCollider.GetComponent<SecurityDoor>();
-            if (securityDoor != null)
-            {
-                securityDoor.Interact(this);
-                return;
-            }
-
+            // Normal manual doors can still use manual interaction if needed
             var door = currentCollider.GetComponent<Door>();
             if (door != null)
             {
