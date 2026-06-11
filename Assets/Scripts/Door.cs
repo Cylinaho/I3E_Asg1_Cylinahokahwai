@@ -2,23 +2,27 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
-    public Vector3 rotateAmount = new Vector3(0, 90, 0); // Amount to rotate when opening the door
+    private bool isOpen = false; 
 
-    bool isOpen = false; // Whether the door is open or closed
+    // Changing this to public lets you manually drag the animator into the script slot!
+    public Animator animatorComponent; 
+
+    void Start()
+    {
+        // We remove GetComponent so Unity doesn't try to auto-find it
+        if (animatorComponent == null)
+        {
+            Debug.LogError($"Please drag your Animator component into the slot on {gameObject.name}!", this);
+        }
+    }
 
     public void Interact()
     {
-        if (!isOpen)
+        isOpen = !isOpen; 
+        
+        if (animatorComponent != null)
         {
-            transform.Rotate(rotateAmount); // Rotate the door to open it
-            isOpen = true;
-        }
-        else
-        {
-            transform.Rotate(-rotateAmount); // Rotate back to close the door
-            isOpen = false;
+            animatorComponent.SetBool("isOpen", isOpen);
         }
     }
 }
