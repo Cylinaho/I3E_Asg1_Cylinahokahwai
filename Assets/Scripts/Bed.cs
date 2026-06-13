@@ -19,8 +19,8 @@ public class Bed : MonoBehaviour
             // Just apply the damage directly...
             playerScript.currentHP -= hpDamage;
             
-            // ...because UPdateHP() will automatically clamp it to 0 and fix the UI text!
-            playerScript.UPdateHP();
+            // ...because UUpdateHP() will automatically clamp it to 0 and fix the UI text!
+            playerScript.UpdateHP();
 
             Debug.Log("Ouch! You touched the uncomfortable bed. Current HP: " + playerScript.currentHP);
 
