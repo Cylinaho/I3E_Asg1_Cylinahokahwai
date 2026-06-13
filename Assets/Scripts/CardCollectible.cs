@@ -5,6 +5,7 @@ public class CardCollectible : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public int cardID = 1; // Unique identifier for the card
 
+    // This function is called when the player interacts with the card, and it handles the logic for collecting the card, such as playing a sound effect, updating the player's score, and destroying the card object
     public void CollectCard()
     {
         var audioSource = GetComponent<AudioSource>();
