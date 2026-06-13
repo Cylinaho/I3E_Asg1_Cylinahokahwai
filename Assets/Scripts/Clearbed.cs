@@ -4,8 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Clearbed : MonoBehaviour
 {
-    private AudioSource audioSource;
-    private bool canPlaySound = true;
+    private AudioSource audioSource; // Add the AudioSource component for better performance
+    private bool canPlaySound = true; // Flag to control sound cooldown
     public float soundCooldown = 1.0f; // Time in seconds before the sound can play again
 
     public void PlayLandingSound()
@@ -13,7 +13,7 @@ public class Clearbed : MonoBehaviour
         // Only play if the cooldown is over
         if (canPlaySound)
         {
-            // Fetch the AudioSource component if we haven't already
+            // Try to get the AudioSource component if it hasn't been assigned yet
             if (audioSource == null)
             {
                 audioSource = GetComponent<AudioSource>();
@@ -36,6 +36,7 @@ public class Clearbed : MonoBehaviour
         }
     }
 
+    // This method resets the cooldown, allowing the sound to be played again
     private void ResetSoundCooldown()
     {
         canPlaySound = true;

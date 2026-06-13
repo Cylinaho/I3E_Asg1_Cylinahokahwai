@@ -5,6 +5,7 @@ public class SecurityDoor : MonoBehaviour
     private bool isOpen = false;
     private Animator animatorComponent;
 
+    // This is called automatically by the Player script from anywhere on the map when all items are collected
     void Start()
     {
         animatorComponent = GetComponent<Animator>();
@@ -24,6 +25,7 @@ public class SecurityDoor : MonoBehaviour
         print("All items collected! Security Door is opening automatically.");
     }
 
+    // This method handles the actual animation logic, whether it's through an Animator or a fallback rotation
     private void PlayAnimation()
     {
         if (animatorComponent != null)

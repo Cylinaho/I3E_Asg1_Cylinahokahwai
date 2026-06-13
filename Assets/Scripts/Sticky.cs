@@ -2,27 +2,29 @@ using UnityEngine;
 
 public class Sticky : MonoBehaviour
 {
-    private CharacterController controller;
-    private Vector3 lastPillowPosition;
-    private Transform activePillow;
+    private CharacterController controller; // Reference to the player's CharacterController component
+    private Vector3 lastPillowPosition; // To track the pillow's position from the last frame
+    private Transform activePillow; // The pillow we're currently standing on, if any
 
+    // This is called automatically by Unity when the object is first created
     void Start()
     {
         controller = GetComponent<CharacterController>();
     }
 
+    // This is called automatically by Unity after all Update() calls, ensuring the player has moved for the frame
     void LateUpdate()
     {
-        // Shoot a quick raycast downward to see if we are standing on the pillow
+        // Shoot a quick raycast downward to see if the player is standing on the pillow
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f))
         {
-            // Check if the object below us has the MovingPillow script
+            // Check if the thing player hit has a MovingPillow script on it
             MovingPillow pillow = hit.collider.GetComponent<MovingPillow>();
 
             if (pillow != null)
             {
-                // If we just landed on it, grab its current position
+                // If player just landed on it, grab its current position
                 if (activePillow != pillow.transform)
                 {
                     activePillow = pillow.transform;
@@ -41,7 +43,7 @@ public class Sticky : MonoBehaviour
             }
         }
 
-        // If we jump or step off the pillow, forget it
+        // If player jumps or steps off the pillow, forget it
         activePillow = null;
     }
 }

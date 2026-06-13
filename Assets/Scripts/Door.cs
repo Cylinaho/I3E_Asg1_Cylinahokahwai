@@ -4,18 +4,20 @@ public class Door : MonoBehaviour
 {
     private bool isOpen = false; 
 
-    // Changing this to public lets you manually drag the animator into the script slot!
+    // This assigned in the inspector to the Animator component that controls the door's opening animation
     public Animator animatorComponent; 
 
     void Start()
     {
-        // We remove GetComponent so Unity doesn't try to auto-find it
+        // If the animator component wasn't assigned in the inspector, try to find it on this object or its children
         if (animatorComponent == null)
         {
             Debug.LogError($"Please drag your Animator component into the slot on {gameObject.name}!", this);
         }
     }
 
+
+    // Called automatically by the Player script when the player interacts with this door
     public void Interact()
     {
         isOpen = !isOpen; 
