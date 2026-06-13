@@ -4,15 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Floordmg : MonoBehaviour
 {
-    private AudioSource audioSource;
+    private AudioSource audioSource; // Add the AudioSource component for better performance
 
+    // This is called automatically by Unity when the object is first created
     void OnTriggerEnter(Collider other)
     {
-        Player playerScript = other.gameObject.GetComponent<Player>();
+        Player playerScript = other.gameObject.GetComponent<Player>(); // Try to get the Player script from the object that entered the trigger
 
         if (playerScript != null)
         {
-            // Fetch the AudioSource component if we haven't already
+            // Try to get the AudioSource component if it hasn't been assigned yet
             if (audioSource == null)
             {
                 audioSource = GetComponent<AudioSource>();
