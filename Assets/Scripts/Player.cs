@@ -82,10 +82,10 @@ public class Player : MonoBehaviour
             {
                 // Assuming cardID is 1 per card collected
                 score += collectible.cardID;
-                print($"★ Item Collected! Current Score: {score} / {TotalItemsCollected}");
+                print($"All Items Collected! Current Score: {score} / {TotalItemsCollected}");
                 ScoreText.text = $"Keycards collected: {score} / {TotalItemsCollected}";
 
-                // CHECK FOR WIN CONDITION IMMEDIATELY UPON COLLECTION
+                // Check if the player has collected all items, and if so, automatically open the exit door
                 if (score >= TotalItemsCollected)
                 {
                     print("You collected all items! Opening the exit door automatically!");
